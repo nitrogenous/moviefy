@@ -11,7 +11,10 @@
     };
 
     self.bindActions = function () {
-       
+        $(selectors.searchButton).off('click').on('click', function () {
+            var inputValue = encodeURI($(selectors.inputField).val());
+            self.searchForMovie(inputValue);
+        });
     };
 
     self.searchForMovie = function (movieName) {
