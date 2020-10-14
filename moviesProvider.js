@@ -18,11 +18,20 @@
     };
 
     self.searchForMovie = function (movieName) {
-    
+        $.ajax({
+            url: baseUrl + movieName.replace(/ /g, '+'),
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                self.createMovieCard(result);
+            }
+        });
     }
 
     self.createMovieCard = function (movieDetails) {
-       
+        var cardHtml = '<movie-item  class="card" poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
+        console.log(movieDetails);
+        $('#movies-showcase').prepend(cardHtml);
     };
 
     $('body').ready(function () {
