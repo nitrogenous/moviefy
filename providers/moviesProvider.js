@@ -3,7 +3,9 @@
     const baseUrl = 'http://www.omdbapi.com/?apikey=' + apiKey + '&t=';
     const selectors = {
         searchButton: '#search-button',
-        inputField: '#input-field'
+        inputField: '#input-field',
+        messageItem: '#message-item',
+        messageItemClose: '#message-item-close'
     };
 
     self.init = function () {
@@ -16,8 +18,8 @@
             self.searchForMovie(inputValue);
         });
 
-        $(document).off('click.remove').on('click.remove', '#message-item-close', function (event) {
-            $('#message-item').remove();
+        $(document).off('click.remove').on('click.remove', selectors.messageItemClose, function (event) {
+            $(selectors.messageItem).remove();
         });
     };
 
