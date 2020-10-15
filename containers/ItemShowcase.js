@@ -11,7 +11,7 @@ class ItemShowcase extends HTMLElement {
             'overflow-x: scroll;';
 
         let componentHtml = '<h1 class="ui header">' + this.getAttribute('title') + "</h1>" +
-            '<div class="ui link cards" id="movies-showcase" style="' + componentStyle + '" ></div>';
+            '<div class="ui link cards" id="' + this.getAttribute('showcaseId') + '" style="' + componentStyle + '" ></div>';
 
         this.innerHTML = componentHtml;
     };  
