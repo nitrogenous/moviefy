@@ -58,7 +58,8 @@
     };
 
     self.bindLikeAction = function (movieId, movieCard) {
-        $(document).off('click.like').on('click.like', '.like.icon.' + movieId ,function () {
+        $(document).off('click.like-' + movieId).on('click.like-' + movieId, '.like.icon.' + movieId ,function () {
+            console.log(movieId);
             if (!$('.like.icon.' + movieId).hasClass('red')) {
                 $('#favorites-showcase').prepend(movieCard);
                 $('.like.icon.' + movieId).addClass('red');
