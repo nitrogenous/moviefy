@@ -10,6 +10,7 @@
 
     self.init = function () {
         self.bindActions();
+        self.getFavorites();
     };
 
     self.bindActions = function () {
@@ -21,6 +22,12 @@
         $(document).off('click.remove').on('click.remove', selectors.messageItemClose, function (event) {
             $(selectors.messageItem).remove();
         });
+    };
+
+    self.getFavorites = function () {
+        var favoriteMovies = localStorage.getItem('favorite-movies');
+
+        $('#favorites-showcase').html(favoriteMovies);
     };
 
     self.searchForMovie = function (movieName) {
@@ -59,7 +66,6 @@
 
     self.bindLikeAction = function (movieId, movieCard) {
         $(document).off('click.like-' + movieId).on('click.like-' + movieId, '.like.icon.' + movieId ,function () {
-            console.log(movieId);
             if (!$('.like.icon.' + movieId).hasClass('red')) {
                 $('#favorites-showcase').prepend(movieCard);
                 $('.like.icon.' + movieId).addClass('red');
@@ -68,7 +74,15 @@
                 $('#favorites-showcase #' + movieId).remove();
                 $('#movies-showcase .like.icon.' + movieId).removeClass('red');
             }
+
+            self.updateFavorites();
         });
+    };
+
+    self.updateFavorites = function () {
+        var favoritesHtml = $('#favorites-showcase').html();
+
+        localStorage.setItem("favorite-movies", favoritesHtml);
     };
 
     $('body').ready(function () {
