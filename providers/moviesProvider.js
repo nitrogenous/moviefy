@@ -30,7 +30,7 @@
             dataType: 'json',
             success: function (result) {
                 if (!!result.Error) {
-                    self.showErrorMessage(result.Error);
+                    self.showMessage(result.Error, 'negative', 'message-item');
                     return;
                 }
                 self.createMovieCard(result);
@@ -38,11 +38,12 @@
         });
     }
 
-    self.showErrorMessage = function (messageText) {
-        if ($(selectors.messageItem).length) {
+    self.showMessage = function (messageText, messageType, messageId) {
+        if ($('#' + messageId).length) {
             return;
         }
-        var messageHtml = '<message-item itemId="message-item" message="' + messageText + '" type="negative" />'
+
+        var messageHtml = '<message-item elementId="' + messageId + '" message="' + messageText + '" type="' + messageType + '" />';
 
         $('body').prepend(messageHtml);
     };
