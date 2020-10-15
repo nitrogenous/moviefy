@@ -24,7 +24,7 @@
             dataType: 'json',
             success: function (result) {
                 if (!!result.Error) {
-                    console.warn(result.Error);
+                    self.showErrorMessage(result.Error);
                     return;
                 }
                 self.createMovieCard(result);
@@ -32,9 +32,15 @@
         });
     }
 
+    self.showErrorMessage = function (messageText) {
+        var messageHtml = '<message-item message="' + messageText + '" type="negative" />'
+
+        $('body').prepend(messageHtml);
+    };
+
     self.createMovieCard = function (movieDetails) {
         var cardHtml = '<movie-item poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
-        console.log(movieDetails);
+        
         $('#movies-showcase').prepend(cardHtml);
     };
 
