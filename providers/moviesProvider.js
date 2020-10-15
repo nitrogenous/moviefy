@@ -28,12 +28,13 @@
             url: baseUrl + movieName.replace(/ /g, '+'),
             async: false,
             dataType: 'json',
-            success: function (result) {
-                if (!!result.Error) {
-                    self.showMessage(result.Error, 'negative', 'message-item');
+            success: function (response) {
+                if (!!response.Error) {
+                    self.showMessage(response.Error, 'negative', 'message-item');
                     return;
                 }
-                self.createMovieCard(result);
+
+                self.createMovieCard(response);
             }
         });
     }
@@ -49,9 +50,17 @@
     };
 
     self.createMovieCard = function (movieDetails) {
-        var cardHtml = '<movie-item poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
+        var cardHtml = '<movie-item  id="' + movieDetails.imdbID + '" poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
         
         $('#movies-showcase').prepend(cardHtml);
+
+        self.bindLikeAction(movieDetails.imdbID, cardHtml);
+    };
+
+    self.bindLikeAction = function (movieId, movieCard) {
+        $(document).off('click.like').on('click.like', '.like.icon.' + movieId ,function () {
+            $('#favorites-showcase').prepend(movieCard);
+        });
     };
 
     $('body').ready(function () {
