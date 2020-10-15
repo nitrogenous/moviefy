@@ -11,16 +11,17 @@
         <script src="./providers/moviesProvider.js"></script>
         <script src="./components/MovieItem.js"></script>
         <script src="./components/MessageItem.js"></script>
+        <script src="./containers/ItemShowcase.js"></script>
     </head>
-    <body style='display: flex; justify-content: center;'>
-        <div id='search-field'>
+    <body >
+        <div id='search-field' style='display: flex; justify-content: center;'>
             <div class="ui action input">
                 <input type="text" placeholder="Movie Name..." id='input-field'>
                 <button class="ui button" id='search-button'>Search</button>
             </div>
         </div>
-        <div class='ui link cards' id='movies-showcase'>
+        <item-showcase class='ui link cards' id='movies-showcase'>
 
-        </div>
+        </item-showcase>
     </body>
 </html>
