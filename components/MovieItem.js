@@ -8,7 +8,11 @@ class MovieItem extends HTMLElement {
             '<div class="meta">' + 
             '<a>' + (this.getAttribute('director') || '') + '</a>' +
             '</div>' +
-            '<div class="description">' + (this.getAttribute('plot') || '') + '</div>';
+            '<div class="description">' + (this.getAttribute('plot') || '') + '</div></div>' + 
+            '<div class="extra content">' + 
+            '<span class="right floated">' + 
+            '<i class="heart outline like icon ' + this.getAttribute('id') + '"></i>' + 
+            '</span></div>';
 
         this.setAttribute('class', 'card');
         this.innerHTML = componentHtml;
