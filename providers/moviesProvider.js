@@ -33,7 +33,7 @@
     }
 
     self.createMovieCard = function (movieDetails) {
-        var cardHtml = '<movie-item  class="card" poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
+        var cardHtml = '<movie-item poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
         console.log(movieDetails);
         $('#movies-showcase').prepend(cardHtml);
     };
