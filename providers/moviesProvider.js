@@ -13,7 +13,7 @@
     };
 
     self.bindActions = function () {
-        $(selectors.searchButton).off('click').on('click', function () {
+        $(selectors.searchButton).off('click.search').on('click.search', function () {
             var inputValue = encodeURI($(selectors.inputField).val());
             self.searchForMovie(inputValue);
         });
