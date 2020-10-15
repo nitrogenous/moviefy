@@ -59,7 +59,14 @@
 
     self.bindLikeAction = function (movieId, movieCard) {
         $(document).off('click.like').on('click.like', '.like.icon.' + movieId ,function () {
-            $('#favorites-showcase').prepend(movieCard);
+            if (!$('.like.icon.' + movieId).hasClass('red')) {
+                $('#favorites-showcase').prepend(movieCard);
+                $('.like.icon.' + movieId).addClass('red');
+            }
+            else {
+                $('#favorites-showcase #' + movieId).remove();
+                $('#movies-showcase .like.icon.' + movieId).removeClass('red');
+            }
         });
     };
 
