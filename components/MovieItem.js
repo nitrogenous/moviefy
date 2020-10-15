@@ -11,6 +11,7 @@ class MovieItem extends HTMLElement {
             '</div>' +
             '<div class="description">' + (this.getAttribute('plot') || '') + '</div>';
 
+        this.setAttribute('class', 'card');
         this.innerHTML = componentHtml;
     };
   }
