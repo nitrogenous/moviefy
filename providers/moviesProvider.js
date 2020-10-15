@@ -15,6 +15,10 @@
             var inputValue = encodeURI($(selectors.inputField).val());
             self.searchForMovie(inputValue);
         });
+
+        $(document).off('click.remove').on('click.remove', '#message-item-close', function (event) {
+            $('#message-item').remove();
+        });
     };
 
     self.searchForMovie = function (movieName) {
