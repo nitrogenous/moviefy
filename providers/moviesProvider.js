@@ -39,7 +39,10 @@
     }
 
     self.showErrorMessage = function (messageText) {
-        var messageHtml = '<message-item message="' + messageText + '" type="negative" />'
+        if ($(selectors.messageItem).length) {
+            return;
+        }
+        var messageHtml = '<message-item itemId="message-item" message="' + messageText + '" type="negative" />'
 
         $('body').prepend(messageHtml);
     };
