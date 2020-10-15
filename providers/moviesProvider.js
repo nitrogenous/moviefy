@@ -23,6 +23,10 @@
             async: false,
             dataType: 'json',
             success: function (result) {
+                if (!!result.Error) {
+                    console.warn(result.Error);
+                    return;
+                }
                 self.createMovieCard(result);
             }
         });
@@ -37,6 +41,5 @@
     $('body').ready(function () {
         self.init();
     });
-
 }({}))
 
