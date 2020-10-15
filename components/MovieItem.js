@@ -1,7 +1,6 @@
 class MovieItem extends HTMLElement {
     connectedCallback () {
-        let  componentHtml = 
-            '<div class="image">' +
+        let  componentHtml = '<div class="image">' +
             '<img src="' + (this.getAttribute('poster') || '') + '"/>' +
             '</div>' +
             '<div class="content">' +
