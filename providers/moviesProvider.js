@@ -61,7 +61,7 @@
     }
 
     self.saveToHistory = function (movieName) {
-
+        
     };
 
     self.showMessage = function (messageText, messageType, messageId) {
@@ -93,12 +93,10 @@
 
         if (movieCard.attr('liked')) {
             movieCard.removeAttr('liked');
-
             $(selectors.showcases.favorites + ' ' + cardSelector).remove();
         }
         else {
             movieCard.attr('liked', true);
-
             $(selectors.showcases.favorites).prepend(movieCard[0].outerHTML);
         }
 
