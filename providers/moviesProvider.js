@@ -37,6 +37,7 @@
         self.closeMessageAction();
         self.likeAction();
         self.historyItemActions();
+        self.searchOnEnter();
     };
 
     self.inputLenghtCheckAction = function () {
@@ -156,6 +157,15 @@
 
         $(parentsSelector).html(unhashedValue);
     };
+
+    self.searchOnEnter = function () {
+        $(document).keypress(function (e) {
+            if(e.which == 13) {
+                $(selectors.search.button).click();
+                return false;  
+            }
+        });   
+    }
 
     $('body').ready(function () {
         self.init();
