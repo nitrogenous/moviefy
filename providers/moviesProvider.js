@@ -160,7 +160,7 @@
 
     self.searchOnEnter = function () {
         $(document).keypress(function (e) {
-            if(e.which == 13) {
+            if(e.which == 13 && $(selectors.search.input).val().length >= 3) {
                 $(selectors.search.button).click();
                 return false;  
             }
