@@ -78,6 +78,10 @@
     };
 
     self.saveToHistory = function (movieName) {
+        if ($('#search-history').children().length == 10) {
+            $('#search-history').children().last().remove();
+        };
+        
         var itemHtml = '<history-item movieName="' + movieName + '" />';
 
         $('[movieName= "'+ movieName +'" ]').remove();
