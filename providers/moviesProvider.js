@@ -29,6 +29,15 @@
         self.searchAction();
         self.closeMessageAction();
         self.likeAction();
+        self.historyItemAction();
+    };
+
+    self.historyItemAction = function () {
+        $(document).off('click.historySearch').on('click.historySearch', '#historyItem', function (event) {
+            var movieName = $(event.target).text();
+            
+            self.searchForMovie(movieName);
+        });
     };
 
     self.inputLenghtCheckAction = function () {
@@ -44,7 +53,7 @@
 
     self.searchAction = function () {
         $(selectors.search.button).off('click.search').on('click.search', function () {
-            var inputValue = encodeURI($(selectors.search.input).val());
+            var inputValue = $(selectors.search.input).val();
 
             self.searchForMovie(inputValue);
         });
@@ -69,7 +78,10 @@
     };
 
     self.saveToHistory = function (movieName) {
+        var itemHtml = '<history-item movieName="' + movieName + '" />';
 
+        $('[movieName= "'+ movieName +'" ]').remove();
+        $('#search-history').prepend(itemHtml);
     };
 
     self.showMessage = function (messageText, messageType) {
