@@ -25,24 +25,10 @@
     };
 
     self.bindActions = function () {
-       
         self.inputLenghtCheckAction();
-
-        $(selectors.search.button).off('click.search').on('click.search', function () {
-            var inputValue = encodeURI($(selectors.search.input).val());
-
-            self.searchForMovie(inputValue);
-        });
-
-        $(document).off('click.closeMsg').on('click.closeMsg', selectors.message.button, function (event) {
-            $(selectors.message.item).remove();
-        });
-
-        $(document).off('click.like').on('click.like', '.like.icon', function (event) {
-            var movieCardSelector = '#' + $(event.target.offsetParent).attr('id')
-
-            self.likeAction(movieCardSelector);
-        });
+        self.searchAction();
+        self.closeMessageAction();
+        self.likeAction();
     };
 
     self.inputLenghtCheckAction = function () {
@@ -55,6 +41,14 @@
             }
         });
     }
+
+    self.searchAction = function () {
+        $(selectors.search.button).off('click.search').on('click.search', function () {
+            var inputValue = encodeURI($(selectors.search.input).val());
+
+            self.searchForMovie(inputValue);
+        });
+    };
 
     self.searchForMovie = function (movieName) {
         $.ajax({
@@ -72,7 +66,7 @@
                 self.createMovieCard(response);
             }
         });
-    }
+    };
 
     self.saveToHistory = function (movieName) {
 
@@ -93,33 +87,43 @@
         $(selectors.showcases.movies).prepend(cardHtml);
     };
 
-    self.getFavorites = function () {
-        var favoriteMovies = localStorage.getItem(selectors.localstorage.favoriteMovies);
 
-        $(selectors.showcases.favorites).html(favoriteMovies);
+    self.closeMessageAction = function () {
+        $(document).off('click.closeMsg').on('click.closeMsg', selectors.message.button, function (event) {
+            $(selectors.message.item).remove();
+        });
     };
 
-    self.likeAction = function (cardSelector) {
-        var movieCard = $(cardSelector);
+    self.likeAction = function () {
+        $(document).off('click.like').on('click.like', '.like.icon', function (event) {
+            var movieCardSelector = '#' + $(event.target.offsetParent).attr('id')
+            var movieCard = $(movieCardSelector);
 
-        if (movieCard.attr('liked')) {
-            movieCard.removeAttr('liked');
-            $(selectors.showcases.favorites + ' ' + cardSelector).remove();
-        }
-        else {
-            movieCard.attr('liked', true);
-            $(selectors.showcases.favorites).prepend(movieCard[0].outerHTML);
-
-            self.showMessage('Added to favorites!', 'positive');
-        }
-
-        self.updateFavorites();
+            if (movieCard.attr('liked')) {
+                movieCard.removeAttr('liked');
+                $(selectors.showcases.favorites + ' ' + movieCardSelector).remove();
+            }
+            else {
+                movieCard.attr('liked', true);
+                $(selectors.showcases.favorites).prepend(movieCard[0].outerHTML);
+    
+                self.showMessage('Added to favorites!', 'positive');
+            }
+    
+            self.updateFavorites();
+        });
     };
 
     self.updateFavorites = function () {
         var favoritesHtml = $(selectors.showcases.favorites).html();
 
         localStorage.setItem(selectors.localstorage.favoriteMovies, favoritesHtml);
+    };
+   
+    self.getFavorites = function () {
+        var favoriteMovies = localStorage.getItem(selectors.localstorage.favoriteMovies);
+
+        $(selectors.showcases.favorites).html(favoriteMovies);
     };
 
     $('body').ready(function () {
