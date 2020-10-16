@@ -1,6 +1,6 @@
 (function (self) {
     const apiKey = '976d21e3';
-    const baseUrl = 'http://www.omdbapi.com/?apikey=' + apiKey + '&t=';
+    const baseUrl = 'https://www.omdbapi.com/?apikey=' + apiKey + '&t=';
     const selectors = {
         search: {
             input: '#input-field',
