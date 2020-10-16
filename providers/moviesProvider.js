@@ -61,7 +61,7 @@
     }
 
     self.saveToHistory = function (movieName) {
-        
+
     };
 
     self.showMessage = function (messageText, messageType, messageId) {
@@ -98,6 +98,8 @@
         else {
             movieCard.attr('liked', true);
             $(selectors.showcases.favorites).prepend(movieCard[0].outerHTML);
+            
+            self.showMessage('Added to favorites!', 'positive', 'message-item');
         }
 
         self.updateFavorites();
