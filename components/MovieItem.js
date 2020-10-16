@@ -1,5 +1,5 @@
 class MovieItem extends HTMLElement {
-    connectedCallback () {
+    render () {
         var isLiked = this.getAttribute('liked');
         var likeButtonStyle = isLiked ? 'red heart filled like icon' : 'heart outline like icon';
         let  componentHtml = '<div class="image">' +
@@ -19,6 +19,22 @@ class MovieItem extends HTMLElement {
         this.setAttribute('class', 'card');
         this.innerHTML = componentHtml;
     };
+
+    connectedCallback() { 
+        if (!this.rendered) {
+          this.render();
+          this.rendered = true;
+        }
+    };
+    
+    static get observedAttributes() {
+        return ['liked'];
+    };
+    
+    attributeChangedCallback() {
+        this.render();
+    };
+
   }
 
   customElements.define('movie-item', MovieItem);
