@@ -37,4 +37,4 @@ class MovieItem extends HTMLElement {
 
   }
 
-  customElements.define('movie-item', MovieItem);
+customElements.define('movie-item', MovieItem);
