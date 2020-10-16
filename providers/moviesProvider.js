@@ -49,7 +49,7 @@
             dataType: 'json',
             success: function (response) {
                 if (!!response.Error) {
-                    self.showMessage(response.Error, 'negative', 'message-item');
+                    self.showMessage(response.Error, 'negative');
 
                     return;
                 }
@@ -64,13 +64,10 @@
 
     };
 
-    self.showMessage = function (messageText, messageType, messageId) {
-        if ($('#' + messageId).length) {
-            return;
-        }
-
-        var messageHtml = '<message-item elementId="' + messageId + '" message="' + messageText + '" type="' + messageType + '" />';
-
+    self.showMessage = function (messageText, messageType) {
+        var messageHtml = '<message-item id="message-item" message="' + messageText + '" type="' + messageType + '" />';
+        
+        $(selectors.message.item).remove()
         $('body').prepend(messageHtml);
     };
 
@@ -98,8 +95,8 @@
         else {
             movieCard.attr('liked', true);
             $(selectors.showcases.favorites).prepend(movieCard[0].outerHTML);
-            
-            self.showMessage('Added to favorites!', 'positive', 'message-item');
+
+            self.showMessage('Added to favorites!', 'positive');
         }
 
         self.updateFavorites();
