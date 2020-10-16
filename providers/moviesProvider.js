@@ -115,13 +115,13 @@
     };
 
     self.updateFavorites = function () {
-        var favoritesHtml = $(selectors.showcases.favorites).html();
+        var favoritesHtml = window.btoa($(selectors.showcases.favorites).html());
 
         localStorage.setItem(selectors.localstorage.favoriteMovies, favoritesHtml);
     };
    
     self.getFavorites = function () {
-        var favoriteMovies = localStorage.getItem(selectors.localstorage.favoriteMovies);
+        var favoriteMovies = window.atob(localStorage.getItem(selectors.localstorage.favoriteMovies));
 
         $(selectors.showcases.favorites).html(favoriteMovies);
     };
