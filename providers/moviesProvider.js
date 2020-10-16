@@ -19,8 +19,24 @@
             self.searchForMovie(inputValue);
         });
 
-        $(document).off('click.remove').on('click.remove', selectors.messageItemClose, function (event) {
+        $(document).off('click.closeMsg').on('click.closeMsg', selectors.messageItemClose, function (event) {
             $(selectors.messageItem).remove();
+        });
+
+        $(document).off('click.like').on('click.like', '.like.icon', function (event) {
+            var movieSelector = '#' + $(event.target.offsetParent).attr('id');
+            var movieCard = $(movieSelector)
+
+            if (movieCard.attr('liked')) {
+                movieCard.removeAttr('liked');
+                $('#favorites-showcase ' + movieSelector).remove();
+            }
+            else {
+                $(movieSelector).attr('liked', 'true');
+                $('#favorites-showcase').prepend(movieCard[0].outerHTML);
+            }
+            
+            self.updateFavorites();
         });
     };
 
@@ -61,23 +77,23 @@
         
         $('#movies-showcase').prepend(cardHtml);
 
-        self.bindLikeAction(movieDetails.imdbID, cardHtml);
+        // self.bindLikeAction(movieDetails.imdbID, cardHtml);
     };
 
-    self.bindLikeAction = function (movieId, movieCard) {
-        $(document).off('click.like-' + movieId).on('click.like-' + movieId, '.like.icon.' + movieId ,function () {
-            if (!$('.like.icon.' + movieId).hasClass('red')) {
-                $('#favorites-showcase').prepend(movieCard);
-                $('.like.icon.' + movieId).addClass('red');
-            }
-            else {
-                $('#favorites-showcase #' + movieId).remove();
-                $('#movies-showcase .like.icon.' + movieId).removeClass('red');
-            }
+    // self.bindLikeAction = function (movieId, movieCard) {
+    //     $(document).off('click.like-' + movieId).on('click.like-' + movieId, '.like.icon.' + movieId ,function () {
+    //         if (!$('.like.icon.' + movieId).hasClass('red')) {
+    //             $('#favorites-showcase').prepend(movieCard);
+    //             $('.like.icon.' + movieId).addClass('red');
+    //         }
+    //         else {
+    //             $('#favorites-showcase #' + movieId).remove();
+    //             $('#movies-showcase .like.icon.' + movieId).removeClass('red');
+    //         }
 
-            self.updateFavorites();
-        });
-    };
+    //         self.updateFavorites();
+    //     });
+    // };
 
     self.updateFavorites = function () {
         var favoritesHtml = $('#favorites-showcase').html();
