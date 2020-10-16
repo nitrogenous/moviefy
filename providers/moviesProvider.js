@@ -89,7 +89,6 @@
         self.updateSavedItems('#search-history' ,'search-history');
     };
 
-
     self.createMovieCard = function (movieDetails) {
         var isFavorite = $(selectors.showcases.favorites + ' #' + movieDetails.imdbID).length > 0;
         var cardHtml = '<movie-item id="' + movieDetails.imdbID + '" ' + (isFavorite && 'liked="true"') + ' poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
@@ -97,7 +96,6 @@
         $(selectors.showcases.movies + ' #' + movieDetails.imdbID).remove();
         $(selectors.showcases.movies).prepend(cardHtml);
     };
-
 
     self.closeMessageAction = function () {
         $(document).off('click.closeMsg').on('click.closeMsg', selectors.message.button, function (event) {
