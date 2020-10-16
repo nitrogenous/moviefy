@@ -21,7 +21,8 @@
 
     self.init = function () {
         self.bindActions();
-        self.getFavorites();
+        self.loadSavedItems(selectors.showcases.favorites, selectors.localstorage.favoriteMovies);
+        self.loadSavedItems('#search-history', 'search-history');
     };
 
     self.bindActions = function () {
@@ -81,11 +82,12 @@
         if ($('#search-history').children().length == 10) {
             $('#search-history').children().last().remove();
         };
-        
+
         var itemHtml = '<history-item movieName="' + movieName + '" />';
 
         $('[movieName= "'+ movieName +'" ]').remove();
         $('#search-history').prepend(itemHtml);
+        self.updateSavedItems('#search-history' ,'search-history');
     };
 
     self.showMessage = function (messageText, messageType) {
@@ -126,20 +128,20 @@
                 self.showMessage('Added to favorites!', 'positive');
             }
     
-            self.updateFavorites();
+            self.updateSavedItems(selectors.showcases.favorites, selectors.localstorage.favoriteMovies);
         });
     };
 
-    self.updateFavorites = function () {
-        var favoritesHtml = window.btoa($(selectors.showcases.favorites).html());
+    self.updateSavedItems = function (parentsSelector, localStorageName) {
+        var hashedValue = window.btoa($(parentsSelector).html());
 
-        localStorage.setItem(selectors.localstorage.favoriteMovies, favoritesHtml);
+        localStorage.setItem(localStorageName, hashedValue);
     };
    
-    self.getFavorites = function () {
-        var favoriteMovies = window.atob(localStorage.getItem(selectors.localstorage.favoriteMovies));
+    self.loadSavedItems = function (parentsSelector, localStorageName) {
+        var unhashedValue = window.atob(localStorage.getItem(localStorageName) || '');
 
-        $(selectors.showcases.favorites).html(favoriteMovies);
+        $(parentsSelector).html(unhashedValue);
     };
 
     $('body').ready(function () {
