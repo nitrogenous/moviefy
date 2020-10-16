@@ -1,7 +1,6 @@
 class MovieItem extends HTMLElement {
     render () {
-        var isLiked = this.getAttribute('liked');
-        var likeButtonStyle = isLiked ? 'red heart filled like icon' : 'heart outline like icon';
+        var likeButtonStyle = this.getAttribute('liked') ? 'red heart filled like icon' : 'heart outline like icon';
         let  componentHtml = '<div class="image">' +
             '<img src="' + (this.getAttribute('poster') || '') + '"/>' +
             '</div>' +
@@ -23,6 +22,7 @@ class MovieItem extends HTMLElement {
     connectedCallback() { 
         if (!this.rendered) {
           this.render();
+          
           this.rendered = true;
         }
     };
