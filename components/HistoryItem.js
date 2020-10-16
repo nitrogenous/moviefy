@@ -6,7 +6,7 @@ class HistoryItem extends HTMLElement {
 
         this.innerHTML = componentHtml;
     };
-
+    
 }
 
 customElements.define('history-item', HistoryItem);

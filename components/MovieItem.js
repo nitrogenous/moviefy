@@ -34,7 +34,7 @@ class MovieItem extends HTMLElement {
     attributeChangedCallback () {
         this.render();
     };
-
-  }
+    
+}
 
 customElements.define('movie-item', MovieItem);
