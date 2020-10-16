@@ -25,6 +25,9 @@
     };
 
     self.bindActions = function () {
+       
+        self.inputLenghtCheckAction();
+
         $(selectors.search.button).off('click.search').on('click.search', function () {
             var inputValue = encodeURI($(selectors.search.input).val());
 
@@ -41,6 +44,17 @@
             self.likeAction(movieCardSelector);
         });
     };
+
+    self.inputLenghtCheckAction = function () {
+        $(selectors.search.input).off('input.search').on('input.search', function (event) {
+            if (event.target.value.length >= 3) {
+                $(selectors.search.button).removeClass('disabled');
+            }
+            else {
+                $(selectors.search.button).addClass('disabled');
+            }
+        });
+    }
 
     self.searchForMovie = function (movieName) {
         $.ajax({
@@ -66,7 +80,7 @@
 
     self.showMessage = function (messageText, messageType) {
         var messageHtml = '<message-item id="message-item" message="' + messageText + '" type="' + messageType + '" />';
-        
+
         $(selectors.message.item).remove()
         $('body').prepend(messageHtml);
     };
