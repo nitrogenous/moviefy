@@ -30,14 +30,20 @@
         self.searchAction();
         self.closeMessageAction();
         self.likeAction();
-        self.historyItemAction();
+        self.historyItemActions();
     };
 
-    self.historyItemAction = function () {
+    self.historyItemActions = function () {
         $(document).off('click.historySearch').on('click.historySearch', '#historyItem', function (event) {
-            var movieName = $(event.target).text();
-            
-            self.searchForMovie(movieName);
+            if (event.target === event.currentTarget) {
+                var movieName = $(event.target).text();
+
+                self.searchForMovie(movieName);
+            }            
+        });
+
+        $(document).off('click.removeHistory').on('click.removeHistory', '#historyItem .icon.close', function (event) {
+            $(event.target).parents()[1].remove();
         });
     };
 
