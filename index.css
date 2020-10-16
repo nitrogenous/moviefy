@@ -28,11 +28,11 @@ history-item {
 movie-item-showcase {
     width: 90vw;
     display: flex;
-    flex-direction: column;
-    background: #F7F7F7;
-    border-radius: 25px;
     padding: 25px;
     margin: 25px 5vw;
+    border-radius: 25px;
+    background: #F7F7F7;
+    flex-direction: column;
 }
 
 movie-item-showcase h1 {
