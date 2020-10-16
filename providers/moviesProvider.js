@@ -44,6 +44,8 @@
 
         $(document).off('click.removeHistory').on('click.removeHistory', '#historyItem .icon.close', function (event) {
             $(event.target).parents()[1].remove();
+            
+            self.updateSavedItems('#search-history' ,'search-history');
         });
     };
 
