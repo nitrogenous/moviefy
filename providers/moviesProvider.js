@@ -84,7 +84,7 @@
     };
 
     self.saveToHistory = function (movieName) {
-        if ($(selectors.history.wrapper).children().length == 10) {
+        if ($(selectors.history.wrapper).children().length == 5) {
             $(selectors.history.wrapper).children().last().remove();
         };
 
