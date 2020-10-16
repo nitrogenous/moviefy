@@ -7,6 +7,7 @@ class ItemShowcase extends HTMLElement {
             'grid-auto-columns: minmax(260px, 1fr);' + 
             'margin-left: 7.5vw;' +
             'width: 85vw;' + 
+            'min-height: 620px;' + 
             'overflow-y: hidden;' + 
             'overflow-x: scroll;';
 
