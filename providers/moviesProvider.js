@@ -54,10 +54,15 @@
                     return;
                 }
 
+                self.saveToHistory(movieName);
                 self.createMovieCard(response);
             }
         });
     }
+
+    self.saveToHistory = function (movieName) {
+
+    };
 
     self.showMessage = function (messageText, messageType, messageId) {
         if ($('#' + messageId).length) {
@@ -72,6 +77,7 @@
     self.createMovieCard = function (movieDetails) {
         var cardHtml = '<movie-item  id="' + movieDetails.imdbID + '" poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
         
+        $('#' + movieDetails.imdbID).remove();
         $(selectors.showcases.movies).prepend(cardHtml);
     };
 
