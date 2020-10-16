@@ -33,22 +33,6 @@
         self.historyItemActions();
     };
 
-    self.historyItemActions = function () {
-        $(document).off('click.historySearch').on('click.historySearch', '#historyItem', function (event) {
-            if (event.target === event.currentTarget) {
-                var movieName = $(event.target).text();
-
-                self.searchForMovie(movieName);
-            }            
-        });
-
-        $(document).off('click.removeHistory').on('click.removeHistory', '#historyItem .icon.close', function (event) {
-            $(event.target).parents()[1].remove();
-            
-            self.updateSavedItems('#search-history' ,'search-history');
-        });
-    };
-
     self.inputLenghtCheckAction = function () {
         $(selectors.search.input).off('input.search').on('input.search', function (event) {
             if (event.target.value.length >= 3) {
@@ -85,6 +69,13 @@
             }
         });
     };
+    
+    self.showMessage = function (messageText, messageType) {
+        var messageHtml = '<message-item id="message-item" message="' + messageText + '" type="' + messageType + '" />';
+
+        $(selectors.message.item).remove()
+        $('body').prepend(messageHtml);
+    };
 
     self.saveToHistory = function (movieName) {
         if ($('#search-history').children().length == 10) {
@@ -98,12 +89,6 @@
         self.updateSavedItems('#search-history' ,'search-history');
     };
 
-    self.showMessage = function (messageText, messageType) {
-        var messageHtml = '<message-item id="message-item" message="' + messageText + '" type="' + messageType + '" />';
-
-        $(selectors.message.item).remove()
-        $('body').prepend(messageHtml);
-    };
 
     self.createMovieCard = function (movieDetails) {
         var isFavorite = $(selectors.showcases.favorites + ' #' + movieDetails.imdbID).length > 0;
@@ -145,7 +130,23 @@
 
         localStorage.setItem(localStorageName, hashedValue);
     };
-   
+
+    self.historyItemActions = function () {
+        $(document).off('click.historySearch').on('click.historySearch', '#historyItem', function (event) {
+            if (event.target === event.currentTarget) {
+                var movieName = $(event.target).text();
+
+                self.searchForMovie(movieName);
+            }            
+        });
+
+        $(document).off('click.removeHistory').on('click.removeHistory', '#historyItem .icon.close', function (event) {
+            $(event.target).parents()[1].remove();
+            
+            self.updateSavedItems('#search-history' ,'search-history');
+        });
+    };
+
     self.loadSavedItems = function (parentsSelector, localStorageName) {
         var unhashedValue = window.atob(localStorage.getItem(localStorageName) || '');
 
