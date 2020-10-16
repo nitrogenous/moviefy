@@ -2,10 +2,21 @@
     const apiKey = '976d21e3';
     const baseUrl = 'http://www.omdbapi.com/?apikey=' + apiKey + '&t=';
     const selectors = {
-        searchButton: '#search-button',
-        inputField: '#input-field',
-        messageItem: '#message-item',
-        messageItemClose: '#message-item-close'
+        search: {
+            input: '#input-field',
+            button: '#search-button'
+        },
+        message: {
+            item: '#message-item',
+            button: '#message-item-close'
+        },
+        showcases: {
+            movies: '#movies-showcase',
+            favorites: '#favorites-showcase'
+        },
+        localstorage: {
+            favoriteMovies: 'favorite-movies'
+        }
     };
 
     self.init = function () {
@@ -14,13 +25,13 @@
     };
 
     self.bindActions = function () {
-        $(selectors.searchButton).off('click.search').on('click.search', function () {
-            var inputValue = encodeURI($(selectors.inputField).val());
+        $(selectors.search.button).off('click.search').on('click.search', function () {
+            var inputValue = encodeURI($(selectors.search.input).val());
             self.searchForMovie(inputValue);
         });
 
-        $(document).off('click.closeMsg').on('click.closeMsg', selectors.messageItemClose, function (event) {
-            $(selectors.messageItem).remove();
+        $(document).off('click.closeMsg').on('click.closeMsg', selectors.message.button, function (event) {
+            $(selectors.message.item).remove();
         });
 
         $(document).off('click.like').on('click.like', '.like.icon', function (event) {
@@ -59,13 +70,13 @@
     self.createMovieCard = function (movieDetails) {
         var cardHtml = '<movie-item  id="' + movieDetails.imdbID + '" poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
         
-        $('#movies-showcase').prepend(cardHtml);
+        $(selectors.showcases.movies).prepend(cardHtml);
     };
 
     self.getFavorites = function () {
-        var favoriteMovies = localStorage.getItem('favorite-movies');
+        var favoriteMovies = localStorage.getItem(selectors.localstorage.favoriteMovies);
 
-        $('#favorites-showcase').html(favoriteMovies);
+        $(selectors.showcases.favorites).html(favoriteMovies);
     };
 
     self.likeAction = function (cardSelector) {
@@ -73,20 +84,20 @@
 
         if (movieCard.attr('liked')) {
             movieCard.removeAttr('liked');
-            $('#favorites-showcase ' + cardSelector).remove();
+            $(selectors.showcases.favorites + ' ' + cardSelector).remove();
         }
         else {
             movieCard.attr('liked', true);
-            $('#favorites-showcase').prepend(movieCard[0].outerHTML);
+            $(selectors.showcases.favorites).prepend(movieCard[0].outerHTML);
         }
 
         self.updateFavorites();
     };
 
     self.updateFavorites = function () {
-        var favoritesHtml = $('#favorites-showcase').html();
+        var favoritesHtml = $(selectors.showcases.favorites).html();
 
-        localStorage.setItem("favorite-movies", favoritesHtml);
+        localStorage.setItem(selectors.localstorage.favoriteMovies, favoritesHtml);
     };
 
     $('body').ready(function () {
