@@ -24,20 +24,25 @@
         });
 
         $(document).off('click.like').on('click.like', '.like.icon', function (event) {
-            var movieSelector = '#' + $(event.target.offsetParent).attr('id');
-            var movieCard = $(movieSelector)
-
-            if (movieCard.attr('liked')) {
-                movieCard.removeAttr('liked');
-                $('#favorites-showcase ' + movieSelector).remove();
-            }
-            else {
-                $(movieSelector).attr('liked', 'true');
-                $('#favorites-showcase').prepend(movieCard[0].outerHTML);
-            }
+            var movieCardSelector = '#' + $(event.target.offsetParent).attr('id')
             
-            self.updateFavorites();
+            self.likeAction(movieCardSelector);
         });
+    };
+
+    self.likeAction = function (cardSelector) {
+        var movieCard = $(cardSelector);
+
+        if (movieCard.attr('liked')) {
+            movieCard.removeAttr('liked');
+            $('#favorites-showcase ' + cardSelector).remove();
+        }
+        else {
+            movieCard.attr('liked', true);
+            $('#favorites-showcase').prepend(movieCard[0].outerHTML);
+        }
+
+        self.updateFavorites();
     };
 
     self.getFavorites = function () {
