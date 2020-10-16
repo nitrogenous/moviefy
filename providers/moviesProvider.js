@@ -25,30 +25,9 @@
 
         $(document).off('click.like').on('click.like', '.like.icon', function (event) {
             var movieCardSelector = '#' + $(event.target.offsetParent).attr('id')
-            
+
             self.likeAction(movieCardSelector);
         });
-    };
-
-    self.likeAction = function (cardSelector) {
-        var movieCard = $(cardSelector);
-
-        if (movieCard.attr('liked')) {
-            movieCard.removeAttr('liked');
-            $('#favorites-showcase ' + cardSelector).remove();
-        }
-        else {
-            movieCard.attr('liked', true);
-            $('#favorites-showcase').prepend(movieCard[0].outerHTML);
-        }
-
-        self.updateFavorites();
-    };
-
-    self.getFavorites = function () {
-        var favoriteMovies = localStorage.getItem('favorite-movies');
-
-        $('#favorites-showcase').html(favoriteMovies);
     };
 
     self.searchForMovie = function (movieName) {
@@ -81,24 +60,28 @@
         var cardHtml = '<movie-item  id="' + movieDetails.imdbID + '" poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
         
         $('#movies-showcase').prepend(cardHtml);
-
-        // self.bindLikeAction(movieDetails.imdbID, cardHtml);
     };
 
-    // self.bindLikeAction = function (movieId, movieCard) {
-    //     $(document).off('click.like-' + movieId).on('click.like-' + movieId, '.like.icon.' + movieId ,function () {
-    //         if (!$('.like.icon.' + movieId).hasClass('red')) {
-    //             $('#favorites-showcase').prepend(movieCard);
-    //             $('.like.icon.' + movieId).addClass('red');
-    //         }
-    //         else {
-    //             $('#favorites-showcase #' + movieId).remove();
-    //             $('#movies-showcase .like.icon.' + movieId).removeClass('red');
-    //         }
+    self.getFavorites = function () {
+        var favoriteMovies = localStorage.getItem('favorite-movies');
 
-    //         self.updateFavorites();
-    //     });
-    // };
+        $('#favorites-showcase').html(favoriteMovies);
+    };
+
+    self.likeAction = function (cardSelector) {
+        var movieCard = $(cardSelector);
+
+        if (movieCard.attr('liked')) {
+            movieCard.removeAttr('liked');
+            $('#favorites-showcase ' + cardSelector).remove();
+        }
+        else {
+            movieCard.attr('liked', true);
+            $('#favorites-showcase').prepend(movieCard[0].outerHTML);
+        }
+
+        self.updateFavorites();
+    };
 
     self.updateFavorites = function () {
         var favoritesHtml = $('#favorites-showcase').html();
