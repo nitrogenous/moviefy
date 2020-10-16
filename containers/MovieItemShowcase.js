@@ -1,6 +1,6 @@
 class ItemShowcase extends HTMLElement {
     connectedCallback () {
-        let componentStyle =  'display: grid;' + 
+        var componentStyle =  'display: grid;' + 
             'grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));' +
             'grid-gap: .5rem;' + 
             'grid-auto-flow: column;' + 
@@ -10,8 +10,7 @@ class ItemShowcase extends HTMLElement {
             'min-height: 620px;' + 
             'overflow-y: hidden;' + 
             'overflow-x: scroll;';
-
-        let componentHtml = '<h1 class="ui header">' + this.getAttribute('title') + "</h1>" +
+        var componentHtml = '<h1 class="ui header">' + this.getAttribute('title') + "</h1>" +
             '<div class="ui link cards" id="' + this.getAttribute('showcaseId') + '" style="' + componentStyle + '" ></div>';
 
         this.innerHTML = componentHtml;

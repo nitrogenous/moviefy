@@ -1,8 +1,8 @@
 class MessageItem extends HTMLElement {
     connectedCallback () {
-        let componentHtml = '<i class="close icon" id="' + this.getAttribute('id') + '-close"></i>' +
+        var componentHtml = '<i class="close icon" id="' + this.getAttribute('id') + '-close"></i>' +
             '<div class="header">' + this.getAttribute('message') + '</div>';   
-        let componentStyle = 'display: flex;' + 
+        var componentStyle = 'display: flex;' + 
         'justify-content: center;';
 
         this.setAttribute('class','ui ' + this.getAttribute('type') + ' message');
