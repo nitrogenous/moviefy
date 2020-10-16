@@ -27,6 +27,7 @@
     self.bindActions = function () {
         $(selectors.search.button).off('click.search').on('click.search', function () {
             var inputValue = encodeURI($(selectors.search.input).val());
+
             self.searchForMovie(inputValue);
         });
 
@@ -49,6 +50,7 @@
             success: function (response) {
                 if (!!response.Error) {
                     self.showMessage(response.Error, 'negative', 'message-item');
+
                     return;
                 }
 
@@ -84,10 +86,12 @@
 
         if (movieCard.attr('liked')) {
             movieCard.removeAttr('liked');
+
             $(selectors.showcases.favorites + ' ' + cardSelector).remove();
         }
         else {
             movieCard.attr('liked', true);
+
             $(selectors.showcases.favorites).prepend(movieCard[0].outerHTML);
         }
 
@@ -103,5 +107,5 @@
     $('body').ready(function () {
         self.init();
     });
-}({}))
 
+}({}));
