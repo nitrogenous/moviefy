@@ -8,6 +8,14 @@ body {
     background: #333745;
 }
 
+#logo {
+    margin: 5px;
+    display: flex;
+    font-size: 62px;
+    justify-content: center;
+    color: #D55F8F !important;
+}
+
 .ui.action.input {
     width: 25vw;
     margin: 10px 0;
