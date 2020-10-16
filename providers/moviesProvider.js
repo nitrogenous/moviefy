@@ -75,9 +75,10 @@
     };
 
     self.createMovieCard = function (movieDetails) {
-        var cardHtml = '<movie-item  id="' + movieDetails.imdbID + '" poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
+        var isFavorite = $(selectors.showcases.favorites + ' #' + movieDetails.imdbID).length > 0;
+        var cardHtml = '<movie-item id="' + movieDetails.imdbID + '" ' + (isFavorite && 'liked="true"') + ' poster="' + movieDetails.Poster + '" name="' + movieDetails.Title + '" director="'+movieDetails.Director+'" plot="'+movieDetails.Plot+'" />'
         
-        $('#' + movieDetails.imdbID).remove();
+        $(selectors.showcases.movies + ' #' + movieDetails.imdbID).remove();
         $(selectors.showcases.movies).prepend(cardHtml);
     };
 
