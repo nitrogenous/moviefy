@@ -28,7 +28,7 @@
     self.init = function () {
         self.bindActions();
         self.loadSavedItems(selectors.showcases.favorites, selectors.localstorage.favoriteMovies);
-        self.loadSavedItems(selectors.localstorage.searchHistory, selectors.localstorage.searchAction);
+        self.loadSavedItems(selectors.history.wrapper, selectors.localstorage.searchAction);
     };
 
     self.bindActions = function () {
@@ -92,7 +92,7 @@
 
         $('[movieName= "'+ movieName +'" ]').remove();
         $(selectors.history.wrapper).prepend(itemHtml);
-        self.updateSavedItems(selectors.localstorage.searchHistory, selectors.localstorage.searchAction);
+        self.updateSavedItems(selectors.history.wrapper, selectors.localstorage.searchAction);
     };
 
     self.createMovieCard = function (movieDetails) {
@@ -147,7 +147,7 @@
         $(document).off('click.removeHistory').on('click.removeHistory', selectors.history.removeButton, function (event) {
             $(event.target).parents()[1].remove();
             
-            self.updateSavedItems(selectors.localstorage.searchHistory, selectors.localstorage.searchAction);
+            self.updateSavedItems(selectors.history.wrapper, selectors.localstorage.searchAction);
         });
     };
 
