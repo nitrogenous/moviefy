@@ -14,8 +14,10 @@ body {
 }
 
 #search-history {
-    display: flex;
     margin: 5px;
+    width: 100vw;
+    display: flex;
+    overflow-x: scroll;
     justify-content: center;
 }
 
