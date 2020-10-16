@@ -19,7 +19,7 @@ class MovieItem extends HTMLElement {
         this.innerHTML = componentHtml;
     };
 
-    connectedCallback() { 
+    connectedCallback () { 
         if (!this.rendered) {
           this.render();
 
@@ -27,11 +27,11 @@ class MovieItem extends HTMLElement {
         }
     };
     
-    static get observedAttributes() {
+    static get observedAttributes () {
         return ['liked'];
     };
     
-    attributeChangedCallback() {
+    attributeChangedCallback () {
         this.render();
     };
 
