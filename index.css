@@ -39,3 +39,11 @@ movie-item-showcase h1 {
     color: #D55F8F !important;
     font-weight: 500 !important;
 }
+
+#signature {
+    margin: 25px;
+    display: flex;
+    color: white;
+    font-size: 18px;
+    justify-content: center;
+}
