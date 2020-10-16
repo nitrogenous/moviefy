@@ -15,14 +15,20 @@
             favorites: '#favorites-showcase'
         },
         localstorage: {
-            favoriteMovies: 'favorite-movies'
+            favoriteMovies: 'favorite-movies',
+            searchHistory: 'search-history'
+        },
+        history: {
+            wrapper: '#search-history',
+            item: '#history-item',
+            removeButton: '#history-item-remove'
         }
     };
 
     self.init = function () {
         self.bindActions();
         self.loadSavedItems(selectors.showcases.favorites, selectors.localstorage.favoriteMovies);
-        self.loadSavedItems('#search-history', 'search-history');
+        self.loadSavedItems(selectors.history.wrapper, selectors.localstorage.searchAction);
     };
 
     self.bindActions = function () {
@@ -78,15 +84,15 @@
     };
 
     self.saveToHistory = function (movieName) {
-        if ($('#search-history').children().length == 10) {
-            $('#search-history').children().last().remove();
+        if ($(selectors.history.wrapper).children().length == 10) {
+            $(selectors.history.wrapper).children().last().remove();
         };
 
         var itemHtml = '<history-item movieName="' + movieName + '" />';
 
         $('[movieName= "'+ movieName +'" ]').remove();
-        $('#search-history').prepend(itemHtml);
-        self.updateSavedItems('#search-history' ,'search-history');
+        $(selectors.history.wrapper).prepend(itemHtml);
+        self.updateSavedItems(selectors.history.wrapper, selectors.localstorage.searchAction);
     };
 
     self.createMovieCard = function (movieDetails) {
@@ -130,7 +136,7 @@
     };
 
     self.historyItemActions = function () {
-        $(document).off('click.historySearch').on('click.historySearch', '#historyItem', function (event) {
+        $(document).off('click.historySearch').on('click.historySearch', selectors.history.item, function (event) {
             if (event.target === event.currentTarget) {
                 var movieName = $(event.target).text();
 
@@ -138,10 +144,10 @@
             }            
         });
 
-        $(document).off('click.removeHistory').on('click.removeHistory', '#historyItem .icon.close', function (event) {
+        $(document).off('click.removeHistory').on('click.removeHistory', selectors.history.removeButton, function (event) {
             $(event.target).parents()[1].remove();
             
-            self.updateSavedItems('#search-history' ,'search-history');
+            self.updateSavedItems(selectors.history.wrapper, selectors.localstorage.searchAction);
         });
     };
 
